@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core"
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer'
-import { Application } from '@nativescript/core'
+import { Application, Color, View } from '@nativescript/core'
 import { NoticiasService } from '../domain/noticias.service'
 
 @Component({
@@ -9,8 +9,12 @@ import { NoticiasService } from '../domain/noticias.service'
   providers: [NoticiasService]*/
 })
 export class SearchComponent implements OnInit {
+  noticias: NoticiasService;
+  resultados: Array<string> = [];
+  @ViewChild("layout") layout: ElementRef;
 
-  constructor(private noticias: NoticiasService) {
+  constructor(noticias: NoticiasService) {
+    this.noticias = noticias;
     // Use the component constructor to inject providers.
   }
 
@@ -30,4 +34,24 @@ export class SearchComponent implements OnInit {
     const sideDrawer = <RadSideDrawer>Application.getRootView()
     sideDrawer.showDrawer()
   }
+
+  onItemTap(x): void {
+    console.dir(x);
+  }
+
+  buscarAhora(s: string) {
+    this.resultados = this.noticias.buscar().filter((x) => x.indexOf(s) >= 0);
+
+    const layout = <View>this.layout.nativeElement;
+    layout.animate({
+      backgroundColor: new Color("blue"),
+      duration: 300,
+      delay: 150
+    }).then(() => layout.animate({
+      backgroundColor: new Color("white"),
+      duration: 300,
+      delay: 150
+    }));
+  }
+
 }

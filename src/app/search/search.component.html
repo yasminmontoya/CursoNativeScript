@@ -7,7 +7,15 @@
   </GridLayout>
 </ActionBar>
 
-<GridLayout class="page__content">
+<StackLayout class="page__content" #layout>
   <Label class="page__content-icon fas" text="&#xf002;"></Label>
-  <Label class="page__content-placeholder" *ngFor="let s of this.noticias.buscar()" [text]="s"></Label>
-</GridLayout>
+  <SearchForm (search)="buscarAhora($event)" [inicial]="'hola'"></SearchForm>
+  <ListView class="list-group" [items]="this.resultados" (ItemTap)="onItemTap($event)">
+    <ng-template let-x="item">
+      <FlexboxLayout flexDirection="row" class="list-group-item">
+        <Image src="res://ic_launcher" class="thumb img-circle"></Image>
+        <Label [text]="x" class="list-group-item-heading" verticalAlignment="center" style="width: 60%"></Label>
+      </FlexboxLayout>
+    </ng-template>
+  </ListView>
+</StackLayout>
