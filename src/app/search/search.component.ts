@@ -6,6 +6,7 @@ import { NoticiasService } from '../domain/noticias.service'
 // import { Store } from "@ngrx/store"
 // import { AppState } from "../app.module"
 // import { Noticia, NuevaNoticiaAction } from "../domain/noticias-state.model"
+import * as SocialShare from "@nativescript/social-share";
 
 @Component({
   selector: 'Search',
@@ -60,6 +61,11 @@ export class SearchComponent implements OnInit {
         console.log("error buscarAhora " + e);
         //Toast.show({text: "Error en la búsqueda", duration: Toast.DURATION.SHORT});
     });
-}
+  }
+
+  onLongPress(s): void {
+    console.log(s);
+    SocialShare.shareText(s, "Asunto: compartido desde el curso!");
+  }
 
 }

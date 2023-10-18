@@ -21,6 +21,9 @@
 		android:theme="@style/AppTheme"
 		android:hardwareAccelerated="true">
 
+		<!-- <meta-data
+			android:name="com.google.android.geo.API_KEY"
+			android:value="@string/nativescript_google_maps_api_key" /> -->
 		<activity
 			android:name="com.tns.NativeScriptActivity"
 			android:label="@string/title_activity_kimera"
@@ -28,7 +31,8 @@
 			android:theme="@style/LaunchScreenTheme"
 			android:hardwareAccelerated="true"
       		android:launchMode="singleTask"
-			android:exported="true">
+			android:exported="true"
+			android:usesCleartextTraffic="true">
 
 			<meta-data android:name="SET_THEME_ON_LAUNCH" android:resource="@style/AppTheme" />
 
